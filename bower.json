@@ -3,5 +3,19 @@
   "version": "0.0.0",
   "dependencies": {
     "anyjs": ""
-  }
+  },
+  "homepage": "https://github.com/totaldesigner/totaldesigner.github.io",
+  "authors": [
+    "totaldesigner <mspark@humaxdigital.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }

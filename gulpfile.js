@@ -36,7 +36,7 @@ gulp.task('scripts', function () {
 gulp.task('views', function () {
     return gulp.src(['!src/jade/layout.jade', 'src/jade/*.jade'])
         .pipe($.jade({pretty: true})).on('error', $.util.log)
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest(''))
         .pipe(browserSync.reload({stream: true}));
 });
 
@@ -87,12 +87,11 @@ gulp.task('clean', function (cb) {
 });
 
 gulp.task('release', function () {
-    gulp.src(['dist/**/**/*']).pipe(gulp.dest(''));
-    gulp.src(['bower_components/anyjs/any.js']).pipe(gulp.dest('js'));
-    gulp.src(['bower_components/anyjs/any.css']).pipe(gulp.dest('css'));
+    gulp.src(['bower_components/anyjs/any.js']).pipe(gulp.dest('dist/js'));
+    gulp.src(['bower_components/anyjs/any.css']).pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('build', ['check', 'scripts', 'styles', 'views', 'images']);
+gulp.task('build', ['check', 'scripts', 'styles', 'views', 'images', 'release']);
 
 
 gulp.task('default', ['clean'], function () {
