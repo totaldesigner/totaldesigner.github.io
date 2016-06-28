@@ -87,8 +87,9 @@ gulp.task('clean', function (cb) {
 });
 
 gulp.task('release', function () {
-    return gulp.src(['dist/**/**/*'])
-        .pipe(gulp.dest(''));
+    gulp.src(['dist/**/**/*']).pipe(gulp.dest(''));
+    gulp.src(['bower_components/anyjs/any.js']).pipe(gulp.dest('js'));
+    gulp.src(['bower_components/anyjs/any.css']).pipe(gulp.dest('css'));
 });
 
 gulp.task('build', ['check', 'scripts', 'styles', 'views', 'images']);
