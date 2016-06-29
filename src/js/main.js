@@ -39,7 +39,8 @@ if (typeof any === 'undefined') {
     headerMenu.append(menu1);
     headerMenu.append(menu2);
     headerInner = new Box();
-    headerInner.addClass('header-inner horizontal');
+    headerInner.addClass('header-inner');
+    headerInner.addClass('horizontal');
     headerInner.append(headerTitle);
     headerInner.append(headerMenu);
     header = new Box();
