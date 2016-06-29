@@ -127,6 +127,9 @@
     right: 15px;
     cursor: pointer;
   }
+  .any #btn-menu:hover {
+    background-color: #dddddd;
+  }
   .any .menu {
     display: none;
   }

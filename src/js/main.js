@@ -23,9 +23,9 @@ if (typeof any === 'undefined') {
     ListView = any.controls.ListView;
 
     list = new List([{
-        name: '일'
+        name: 'WORK'
     }, {
-        name: '삶'
+        name: 'LIFE'
     }]);
 
     page = new Page();
@@ -41,7 +41,7 @@ if (typeof any === 'undefined') {
     });
 
     // header
-    logo = document.createElement('div').appendChild(document.createTextNode('아버지는 어떻게 살아야 하는가?'));
+    logo = document.createElement('div').appendChild(document.createTextNode('The Life of Dad'));
     headerLogo = new Box(new Item(logo));
     headerLogo.addClass('logo');
     headerMenu = new Box();
