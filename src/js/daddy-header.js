@@ -1,0 +1,32 @@
+(function () {
+    var Menu = any.ui.Menu;
+    var List = any.collections.List;
+    var Box = any.controls.Box;
+    var Item = any.controls.Item;
+
+    function Header() {
+        var self = this, data, menu1, menu2, header1, header2, inner;
+        data = new List([{
+            name: 'WORK'
+        }, {
+            name: 'LIFE'
+        }]);
+        menu1 = new Box(new Item('<div id="btn-menu"><i class="fa fa-bars"></i></div>'));
+        menu2 = new Menu(data, '<a>{name}</a>');
+        header1 = new Box(new Item('<div>The Life of Dad</div>'));
+        header1.addClass('title');
+        header2 = new Box();
+        header2.append(menu1);
+        header2.append(menu2);
+        inner = new Box();
+        inner.addClass('header-inner');
+        inner.addClass('horizontal');
+        inner.append(header1);
+        inner.append(header2);
+        self.addClass('header');
+        self.append(inner);
+    }
+
+    Header.prototype = new Box();
+    daddy.Header = Header;
+})();

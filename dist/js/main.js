@@ -1,3 +1,75 @@
+var daddy = {};
+(function () {
+    var Layer = any.controls.Layer;
+
+    function Daddy() {
+        var self = this, header, footer;
+        header = new daddy.Header();
+        footer = new daddy.Footer();
+        self.append(header);
+        self.append(footer);
+        self.header = header;
+        self.footer = footer;
+    }
+
+    Daddy.prototype = new Layer();
+    daddy.create = function() {
+      return new Daddy();
+    };
+})();
+(function() {
+
+})();
+(function() {
+
+})();
+(function () {
+    var Box = any.controls.Box;
+    var Item = any.controls.Item;
+
+    function Footer() {
+        var self = this, inner;
+        inner = new Box(new Item('<div class="copyright"><p>Copyright© totaldesigner</p></div>'));
+        inner.addClass('footer-inner');
+        self.append(inner);
+        self.addClass('footer');
+    }
+
+    Footer.prototype = new Box();
+    daddy.Footer = Footer;
+})();
+(function () {
+    var Menu = any.ui.Menu;
+    var List = any.collections.List;
+    var Box = any.controls.Box;
+    var Item = any.controls.Item;
+
+    function Header() {
+        var self = this, data, menu1, menu2, header1, header2, inner;
+        data = new List([{
+            name: 'WORK'
+        }, {
+            name: 'LIFE'
+        }]);
+        menu1 = new Box(new Item('<div id="btn-menu"><i class="fa fa-bars"></i></div>'));
+        menu2 = new Menu(data, '<a>{name}</a>');
+        header1 = new Box(new Item('<div>The Life of Dad</div>'));
+        header1.addClass('title');
+        header2 = new Box();
+        header2.append(menu1);
+        header2.append(menu2);
+        inner = new Box();
+        inner.addClass('header-inner');
+        inner.addClass('horizontal');
+        inner.append(header1);
+        inner.append(header2);
+        self.addClass('header');
+        self.append(inner);
+    }
+
+    Header.prototype = new Box();
+    daddy.Header = Header;
+})();
 /**
  * Created by mspark on 16. 6. 26.
  */
@@ -9,52 +81,9 @@ if (typeof any === 'undefined') {
 }
 
 (function () {
-    var Page, Layer, Menu, List, Box, Item, ListView,
-        page, layer, menu1, menu2, list, header, footer,
-        headerInner, footerInner, headerTitle, headerMenu;
-
-    Page = any.controls.Page;
-    Layer = any.controls.Layer;
-    Menu = any.ui.Menu;
-    List = any.collections.List;
-    Box = any.controls.Box;
-    Item = any.controls.Item;
-    ListView = any.controls.ListView;
-
-    list = new List([{
-        name: 'WORK'
-    }, {
-        name: 'LIFE'
-    }]);
-
-    page = new Page();
-    layer = new Layer();
-
-    // header
-    menu1 = new Box(new Item('<div id="btn-menu"><i class="fa fa-bars"></i></div>'));
-    menu2 = new Menu(list, '<a>{name}</a>');
-    headerTitle = new Box(new Item('<div>The Life of Dad</div>'));
-    headerTitle.addClass('title');
-    headerMenu = new Box();
-    headerMenu.append(menu1);
-    headerMenu.append(menu2);
-    headerInner = new Box();
-    headerInner.addClass('header-inner');
-    headerInner.addClass('horizontal');
-    headerInner.append(headerTitle);
-    headerInner.append(headerMenu);
-    header = new Box();
-    header.addClass('header');
-    header.append(headerInner);
-    layer.append(header);
-
-    // footer
-    footerInner = new Box(new Item('<div class="copyright"><p>Copyright© totaldesigner</p></div>'));
-    footerInner.addClass('footer-inner');
-    footer = new Box(footerInner);
-    footer.addClass('footer');
-    layer.append(footer);
-
+    var page, layer;
+    layer = daddy.create();
+    page = new any.controls.Page();
     page.append(layer);
     page.draw();
 })();

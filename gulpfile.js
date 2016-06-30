@@ -29,7 +29,13 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function () {
-    return gulp.src('src/js/*.js')
+    return gulp.src([
+            'src/js/daddy.js',
+            'src/js/daddy-banner.js',
+            'src/js/daddy-content.js',
+            'src/js/daddy-footer.js',
+            'src/js/daddy-header.js',
+            'src/js/main.js'])
         .pipe(concat('main.js'))
         //.pipe(uglify())
         .pipe(gulp.dest('dist/js'));
@@ -86,10 +92,6 @@ gulp.task('prepare', function () {
 
 gulp.task('check', function () {
     return gulp.src('src/**/*.js')
-        .pipe(shell([
-            'rm -rf bower_components',
-            'bower cache clean',
-            'bower install']))
         .pipe($.jshint())
         .pipe($.jshint.reporter('default'))
         .pipe($.jshint.reporter('fail'));
