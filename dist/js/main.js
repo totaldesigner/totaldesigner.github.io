@@ -48,9 +48,6 @@ if (typeof any === 'undefined') {
     header.append(headerInner);
     layer.append(header);
 
-    // content
-    content =
-
     // footer
     footerInner = new Box(new Item('<div class="copyright"><p>Copyright© totaldesigner</p></div>'));
     footerInner.addClass('footer-inner');

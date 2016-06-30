@@ -76,6 +76,14 @@ gulp.task('selfcheck', function () {
         .pipe($.jshint.reporter('fail'));
 });
 
+gulp.task('prepare', function () {
+    return gulp.src('src/**/*.js')
+        .pipe(shell([
+            'rm -rf bower_components',
+            'bower cache clean',
+            'bower install']));
+});
+
 gulp.task('check', function () {
     return gulp.src('src/**/*.js')
         .pipe(shell([
@@ -92,12 +100,12 @@ gulp.task('clean', function (cb) {
     del(['dist/css', 'dist/img', 'dist/js'], cb);
 });
 
-gulp.task('release', function () {
+gulp.task('copy', function () {
     gulp.src(['bower_components/anyjs/any.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['bower_components/anyjs/any.css']).pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('build', ['check', 'scripts', 'styles', 'views', 'images', 'release']);
+gulp.task('build', ['check', 'scripts', 'styles', 'views', 'images', 'copy']);
 
 
 gulp.task('default', ['clean'], function () {
