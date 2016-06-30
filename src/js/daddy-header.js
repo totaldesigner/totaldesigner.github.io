@@ -1,8 +1,8 @@
 (function () {
-    var Menu = any.ui.Menu;
     var List = any.collections.List;
-    var Box = any.controls.Box;
     var Item = any.controls.Item;
+    var Box = any.controls.Box;
+    var Menu = any.controls.Menu;
 
     function Header() {
         var self = this, data, menu1, menu2, header1, header2, inner;
@@ -25,6 +25,9 @@
         inner.append(header2);
         self.addClass('header');
         self.append(inner);
+        menu2.addEventListener('MenuItemSelected', function(e) {
+            d.dispatchEvent('MenuItemSelected', e);
+        });
     }
 
     Header.prototype = new Box();

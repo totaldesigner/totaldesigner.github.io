@@ -83,7 +83,7 @@ gulp.task('selfcheck', function () {
 });
 
 gulp.task('prepare', function () {
-    return gulp.src('src/**/*.js')
+    return gulp.src('')
         .pipe(shell([
             'rm -rf bower_components',
             'bower cache clean',

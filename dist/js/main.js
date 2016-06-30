@@ -1,27 +1,57 @@
 var daddy = {};
 (function () {
     var Layer = any.controls.Layer;
+    var events = any.events.MenuItemSelected;
 
     function Daddy() {
-        var self = this, header, footer;
+        var self = this, header, content, footer;
         header = new daddy.Header();
+        content = new daddy.Content();
         footer = new daddy.Footer();
         self.append(header);
+        self.append(content);
         self.append(footer);
         self.header = header;
+        self.content = content;
         self.footer = footer;
     }
 
     Daddy.prototype = new Layer();
     daddy.create = function() {
-      return new Daddy();
+        var d = new Daddy();
+        d.header.addEventListener('MenuItemSelected', function(e) {
+            d.dispatchEvent('MenuItemSelected', e);
+        });
+        return d;
     };
 })();
 (function() {
 
 })();
-(function() {
+(function () {
+    var Box = any.controls.Box;
+    var Item = any.controls.Item;
 
+    function Work() {
+        var self = this;
+    }
+    Work.prototype = new Box();
+
+    function Life() {
+        var self = this;
+    }
+    Life.prototype = new Box();
+
+    function Content() {
+        var self = this, inner;
+        inner = new Box(new Item('<div class="copyright"><p>CONTENT</p></div>'));
+        inner.addClass('content-inner');
+        self.append(inner);
+        self.addClass('content');
+    }
+
+    Content.prototype = new Box();
+    daddy.Content = Content;
 })();
 (function () {
     var Box = any.controls.Box;
@@ -39,10 +69,10 @@ var daddy = {};
     daddy.Footer = Footer;
 })();
 (function () {
-    var Menu = any.ui.Menu;
     var List = any.collections.List;
-    var Box = any.controls.Box;
     var Item = any.controls.Item;
+    var Box = any.controls.Box;
+    var Menu = any.controls.Menu;
 
     function Header() {
         var self = this, data, menu1, menu2, header1, header2, inner;
@@ -65,6 +95,9 @@ var daddy = {};
         inner.append(header2);
         self.addClass('header');
         self.append(inner);
+        menu2.addEventListener('MenuItemSelected', function(e) {
+            d.dispatchEvent('MenuItemSelected', e);
+        });
     }
 
     Header.prototype = new Box();
@@ -83,6 +116,9 @@ if (typeof any === 'undefined') {
 (function () {
     var page, layer;
     layer = daddy.create();
+    layer.addEventListener('MenuItemSelected', function(e) {
+        console.log('TEST');
+    });
     page = new any.controls.Page();
     page.append(layer);
     page.draw();

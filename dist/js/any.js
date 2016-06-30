@@ -8,8 +8,12 @@ var CLASS_NAME = {
     BOX: 'box',
     VIEW: 'view',
     ITEM: 'item',
-    LIST_VIEW: 'list-view',
     LIST_VIEW_ITEM: 'list-view-item',
+    LIST_VIEW: 'list-view',
+    MENU_ITEM: 'menu-item',
+    MENU: 'menu',
+    CONTEXT_MENU_ITEM: 'context-menu-item',
+    CONTEXT_MENU: 'context-menu',
     LAYOUT: 'layout',
     LAYER: 'layer',
     PAGE: 'page'
@@ -122,6 +126,18 @@ any = (function () {
         }
 
         ItemUpdated.prototype = new Event();
+
+        /**
+         * MenuItemSelected
+         * @param sender
+         * @param args
+         * @constructor
+         */
+        function MenuItemSelected(sender, args) {
+            Event.call(this, 'MenuItemSelected', sender, args);
+        }
+
+        MenuItemSelected.prototype = new Event();
 
         /**
          * EventTarget
@@ -436,6 +452,54 @@ any = (function () {
         };
 
         /**
+         * Menu
+         * @param list
+         * @param itemTemplate
+         * @constructor
+         */
+        function Menu(list, itemTemplate) {
+            var self = this;
+            ListView.call(self, list, itemTemplate, CLASS_NAME.MENU);
+        }
+
+        Menu.prototype = new ListView();
+        Menu.prototype.draw = function() {
+            var self = this, child, children;
+            ListView.prototype.draw.call(self);
+            children = self.element.querySelectorAll('.' + self.className + '-item');
+            for (var i = 0, l = children.length; i < l; i++) {
+                child = children[i];
+                self.onMenuItemSelected(child);
+            }
+        };
+        Menu.prototype.onMenuItemSelected = function(child) {
+            var self = this;
+            child.addEventListener('click', function(e) {
+                self.dispatchEvent('MenuItemSelected', new events.MenuItemSelected(self, e));
+            });
+        };
+
+        /**
+         * ContextMenu
+         * @constructor
+         */
+        function ContextMenu() {
+
+        }
+
+        ContextMenu.prototype = new Menu();
+
+        /**
+         * Pagination
+         * @constructor
+         */
+        function Pagination() {
+
+        }
+
+        Pagination.prototype = new ListView();
+
+        /**
          * Box
          * @param child
          * @constructor
@@ -460,6 +524,16 @@ any = (function () {
         }
 
         Layer.prototype = new Control();
+
+        /**
+         * Dialog
+         * @constructor
+         */
+        function Dialog() {
+
+        }
+
+        Dialog.prototype = new Layer();
 
         /**
          * Page
@@ -509,7 +583,11 @@ any = (function () {
             Item: Item,
             Box: Box,
             ListView: ListView,
+            Menu: Menu,
+            ContextMenu: ContextMenu,
+            Pagination: Pagination,
             Layer: Layer,
+            Dialog: Dialog,
             Page: Page
         };
     })();
@@ -521,60 +599,3 @@ any = (function () {
         controls: controls
     };
 })(any);
-
-/**
- * Created by mspark on 16. 6. 25.
- */
-/*jshint browser:true */
-/*globals any:false */
-'use strict';
-
-if (typeof any === 'undefined') {
-    throw new Error('any.ui\'s JavaScript requires any');
-}
-
-var UI_CLASS_NAME = {
-    MENU: 'menu',
-    MENU_ITEM: 'menu-item',
-    CONTEXT_MENU: 'context-menu',
-    CONTEXT_MENU_ITEM: 'context-menu-item'
-};
-
-any.ui = (function () {
-    var controls, ListView, Layer;
-    controls = any.controls;
-    ListView = controls.ListView;
-    Layer = controls.Layer;
-
-    function Menu(list, itemTemplate) {
-        var self = this;
-        ListView.call(self, list, itemTemplate, UI_CLASS_NAME.MENU);
-    }
-
-    Menu.prototype = new ListView();
-
-    function ContextMenu() {
-
-    }
-
-    ContextMenu.prototype = new Menu();
-
-    function Dialog() {
-
-    }
-
-    Dialog.prototype = new Layer();
-
-    function Pagination() {
-
-    }
-
-    Pagination.prototype = new ListView();
-
-    return {
-        ContextMenu: ContextMenu,
-        Dialog: Dialog,
-        Menu: Menu,
-        Pagination: Pagination
-    };
-}());

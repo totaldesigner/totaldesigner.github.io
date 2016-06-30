@@ -11,6 +11,9 @@ if (typeof any === 'undefined') {
 (function () {
     var page, layer;
     layer = daddy.create();
+    layer.addEventListener('MenuItemSelected', function(e) {
+        console.log('TEST');
+    });
     page = new any.controls.Page();
     page.append(layer);
     page.draw();
