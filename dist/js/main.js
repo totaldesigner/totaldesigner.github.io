@@ -1,7 +1,7 @@
 var daddy = {};
 (function () {
     var Layer = any.controls.Layer;
-    var events = any.events.MenuItemSelected;
+    var MenuItemSelected = any.events.MenuItemSelected;
 
     function Daddy() {
         var self = this, header, content, footer;
@@ -18,9 +18,9 @@ var daddy = {};
 
     Daddy.prototype = new Layer();
     daddy.create = function() {
-        var d = new Daddy();
+        var self = this, d = new Daddy();
         d.header.addEventListener('MenuItemSelected', function(e) {
-            d.dispatchEvent('MenuItemSelected', e);
+            d.dispatchEvent(new MenuItemSelected(self, e));
         });
         return d;
     };
@@ -73,6 +73,7 @@ var daddy = {};
     var Item = any.controls.Item;
     var Box = any.controls.Box;
     var Menu = any.controls.Menu;
+    var MenuItemSelected = any.events.MenuItemSelected;
 
     function Header() {
         var self = this, data, menu1, menu2, header1, header2, inner;
@@ -96,7 +97,7 @@ var daddy = {};
         self.addClass('header');
         self.append(inner);
         menu2.addEventListener('MenuItemSelected', function(e) {
-            d.dispatchEvent('MenuItemSelected', e);
+            self.dispatchEvent(new MenuItemSelected(self, e));
         });
     }
 

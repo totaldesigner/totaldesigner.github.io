@@ -1,7 +1,7 @@
 var daddy = {};
 (function () {
     var Layer = any.controls.Layer;
-    var events = any.events.MenuItemSelected;
+    var MenuItemSelected = any.events.MenuItemSelected;
 
     function Daddy() {
         var self = this, header, content, footer;
@@ -18,9 +18,9 @@ var daddy = {};
 
     Daddy.prototype = new Layer();
     daddy.create = function() {
-        var d = new Daddy();
+        var self = this, d = new Daddy();
         d.header.addEventListener('MenuItemSelected', function(e) {
-            d.dispatchEvent('MenuItemSelected', e);
+            d.dispatchEvent(new MenuItemSelected(self, e));
         });
         return d;
     };
