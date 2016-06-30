@@ -405,7 +405,10 @@ any = (function () {
       args = e.args;
       index = args.index;
       if (!isNaN(index)) {
-        child = document.querySelector('.' + self.className + '-item:nth-child(' + (index + 1) + ')');
+        child = document.querySelector(utils.format('.{className}-item:nth-child({index})', {
+          className: self.className,
+          index: index + 1
+        }));
         self.children.splice(index, 1);
         self.element.removeChild(child);
       }
@@ -415,7 +418,10 @@ any = (function () {
       args = e.args;
       index = args.index;
       if (!isNaN(index)) {
-        child = document.querySelector('.' + self.className + '-item:nth-child(' + (index + 1) + ')');
+        child = document.querySelector(utils.format('.{className}-item:nth-child({index})', {
+          className: self.className,
+          index: index + 1
+        }));
         item = new ListViewItem(utils.format(self.itemTemplate, args.item), self.className + '-item');
         item.draw();
         self.children[index] = item;
@@ -449,22 +455,44 @@ any = (function () {
 
     Layer.prototype = new Control();
 
-    function Page() {
-      var self = this;
-      Control.call(self, CLASS_NAME.PAGE);
-    }
-
     /**
      * Page
      * @type {Control}
      */
+    function Page() {
+      var self = this;
+      Control.call(self, CLASS_NAME.PAGE);
+    }
     Page.prototype = new Control();
     Page.prototype.draw = function () {
       var self = this, body;
       body = document.getElementsByTagName('body')[0];
       body.className = 'any';
+      body.addEventListener('keydown', self.onKeyDown);
       Control.prototype.draw.call(self);
       body.appendChild(self.element);
+    };
+    Page.prototype.removeTopLayer = function() {
+      var self = this, topLayer, children = self.children;
+      if (children.length > 0) {
+        topLayer = children.splice(children.length - 1, 1);
+        self.element.removeChild(topLayer.element);
+      }
+    };
+    Page.prototype.onKeyDown = function (e) {
+      var self = this, keyCode = e.keyCode || e.which;
+      if (keyCode === 8 /* BACKSPACE */) {
+        self.removeTopLayer();
+        if (e.stopPropagation) {
+          e.stopPropagation();
+        }
+        if (!e.cancelBubble) {
+          e.cancelBubble = true;
+        }
+        if (e.preventDefault) {
+          e.preventDefault();
+        }
+      }
     };
 
     return {

@@ -4,6 +4,8 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var concat = require('gulp-concat');
 var cssmin = require('gulp-cssmin');
+var git = require('gulp-git');
+var shell = require('gulp-shell');
 var uglify = require('gulp-uglify');
 
 // Load plugins
@@ -76,6 +78,10 @@ gulp.task('selfcheck', function () {
 
 gulp.task('check', function () {
     return gulp.src('src/**/*.js')
+        .pipe(shell([
+            'rm -rf bower_components',
+            'bower cache clean',
+            'bower install']))
         .pipe($.jshint())
         .pipe($.jshint.reporter('default'))
         .pipe($.jshint.reporter('fail'));
