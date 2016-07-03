@@ -10,17 +10,21 @@
 }
 .any .side-menu {
   position: fixed;
-  top: 150px;
+  top: 350px;
   right: 0;
   background: #ffffff;
   padding: 20px;
+  border-left: solid 1px #dddddd;
+  border-top: solid 1px #dddddd;
+  border-bottom: solid 1px #dddddd;
 }
 .any .side-menu a {
-  padding: 10px 0;
+  padding: 10px 15px;
   display: block;
   font-size: 14px;
   text-decoration: none;
   cursor: pointer;
+  color: #808080;
 }
 .any .section-title {
   padding-top: 30px;
@@ -62,8 +66,10 @@
 }
 .any .box.content .content-inner img {
   max-width: 100%;
-  height: auto;
   vertical-align: bottom;
+}
+.any .box.content .content-inner section img {
+  width: 400px;
 }
 .any .box.footer {
   padding-top: 5px;
@@ -80,6 +86,10 @@
   .any .box.header .menu li a {
     padding: 10px 7px;
     font-size: 11px;
+  }
+  .any .carousel img {
+    height: 100px;
+    width: 100%;
   }
 }
 /* ########## 767px 이하 ########## */
@@ -103,6 +113,13 @@
   .any .menu {
     display: none;
   }
+  .any .side-menu {
+    display: none;
+  }
+  .any .carousel img {
+    height: 150px;
+    width: 100%;
+  }
 }
 /* ########## 768px 이상 ########## */
 @media (min-width: 768px) {
@@ -112,11 +129,19 @@
   .any .box.header .menu {
     float: right;
   }
+  .any .carousel img {
+    height: 150px;
+    width: 100%;
+  }
 }
 /* ########## 1190px 이상 ########## */
 @media (min-width: 1190px) {
   .any .box.header {
     margin-bottom: 20px;
+  }
+  .any .carousel img {
+    height: 200px;
+    width: 100%;
   }
   .any .header-inner,
   .any .content-inner,
