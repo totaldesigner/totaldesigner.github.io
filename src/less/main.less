@@ -1,15 +1,26 @@
 .any {
   color: #666666;
   .title {
-    font-size: 20px;
+    font-size: 30px;
   }
   .box {
-    &.header, &.footer, &.banner {
+    &.header, &.content, &.banner, &.footer {
       padding: 20px 15px 10px 15px;
     }
     &.header {
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding-left: 0;
+      width: 100%;
+      background-color: #ffffff;
       border-bottom: solid 1px #dddddd;
       .menu {
+        .menu-item {
+          &.selected {
+            background-color: #dddddd;
+          }
+        }
         .menu-item:nth-child(odd) {
           border: solid 1px #dddddd;
         }
@@ -23,7 +34,17 @@
         }
       }
     }
+    &.content {
+      .content-inner {
+        img {
+          max-width: 100%;
+          height: auto;
+          vertical-align: bottom;
+        }
+      }
+    }
     &.banner {
+      margin-top: 100px;
       .banner-inner {
         img {
           max-width: 100%;
@@ -32,100 +53,17 @@
         }
       }
     }
-    &.photo {
-      img {
-        max-width: 100%;
-        height: auto;
-        vertical-align: bottom;
-      }
-    }
-    &.info {
-      //padding-bottom: 20px;
-      padding: 20px;
-      .info-main {
-        width: 100% !important;
-        padding-bottom: 20px;
-        .news {
-          padding: 20px;
-          //border: solid 5px #dddddd;
-        }
-        h1 {
-          margin-top: 0;
-          margin-bottom: 5px;
-          font-size: 18px;
-          color: #666666;
-        }
-        li {
-          a {
-            border-bottom: dotted 2px #dddddd;
-            &:after {
-              content: "";
-              display: block;
-              clear: both
-            }
-            time {
-              color: #888888;
-              font-weight: bold;
-              float: left;
-              width: 60px
-            }
-            div {
-              float: none;
-              width: auto;
-              margin-left: 60px
-            }
-          }
-        }
-      }
-      .info-sub {
-        width: 100% !important;
-        ul {
-          margin: 0;
-          padding: 0;
-          list-style: none;
-          li a {
-            display: block;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 4px;
-            color: #ffffff;
-            font-size: 14px;
-            text-decoration: none;
-            &:hover {
-              opacity: 0.8;
-              background-color: #eeeeee;
-            }
-            &.follow-tw {
-              background-color: #63bafb;
-            }
-            &.follow-fb {
-              background-color: #5288f7;
-            }
-            &.follow-gp {
-              background-color: #f65d4a;
-            }
-            &.fa-twitter:before {
-              content: "\f099";
-            }
-          }
-        }
-        i {
-          margin-right: 10px;
-          font-size: 24px;
-          vertical-align: middle;
-        }
-      }
-    }
     &.footer {
-      padding-top: 15px;
-      padding-bottom: 15px;
-      //background-color: #dddddd;
+      padding-top: 5px;
+      border-top: solid 1px #dddddd;
       .copyright {
         > p {
-          margin: 0;
           font-size: 14px;
         }
       }
+    }
+    .pagination {
+      margin-top: 10px;
     }
   }
 }
@@ -151,6 +89,9 @@
 /* ########## 767px 이하 ########## */
 @media (max-width: 767px) {
   .any {
+    .header-inner {
+      padding-left: 15px;
+    }
     #btn-menu {
       padding: 6px 12px;
       border: solid 1px #aaaaaa;
@@ -158,7 +99,7 @@
       background-color: #ffffff;
       position: absolute;
       top: 20px;
-      right: 15px;
+      right: 30px;
       cursor: pointer;
       &:hover {
         background-color: #dddddd;
@@ -182,15 +123,6 @@
           float: right;
         }
       }
-      &.info {
-        .info-main {
-          //box-sizing: border-box;
-        }
-        .info-sub {
-          float: left;
-          width: 30% !important;
-        }
-      }
     }
   }
 }
@@ -203,7 +135,7 @@
         margin-bottom: 20px;
       }
     }
-    .header-inner, .footer-inner, .photo, .pickup, .info {
+    .header-inner, .content-inner, .footer-inner, .banner-inner {
       width: 1140px;
       margin-left: auto;
       margin-right: auto;

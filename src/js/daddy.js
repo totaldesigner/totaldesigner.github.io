@@ -5,18 +5,18 @@ var daddy = {};
 
     function Daddy() {
         var self = this, header, content, footer, banner;
-        header = new daddy.Header();
+        banner = new daddy.Banner();
         content = new daddy.Content();
         footer = new daddy.Footer();
-        banner = new daddy.Banner();
-        self.append(header);
+        header = new daddy.Header();
+        self.append(banner);
         self.append(content);
         self.append(footer);
-        self.append(banner);
-        self.header = header;
+        self.append(header);
+        self.banner = banner;
         self.content = content;
         self.footer = footer;
-        self.banner = banner;
+        self.header = header;
     }
 
     Daddy.prototype = new Layer();

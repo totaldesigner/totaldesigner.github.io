@@ -55,7 +55,7 @@ gulp.task('images', function () {
                 convertPathData: false
             }]
         }))
-        .pipe(gulp.dest('img'));
+        .pipe(gulp.dest('dist/img'));
 });
 
 gulp.task('browser-sync', function () {
