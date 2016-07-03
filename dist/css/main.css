@@ -3,10 +3,27 @@
 }
 .any .title {
   font-size: 30px;
+  font-weight: bold;
+}
+.any .sub-title {
+  float: none;
+}
+.any .side-menu {
+  position: fixed;
+  top: 150px;
+  right: 0;
+  background: #ffffff;
+  padding: 20px;
+}
+.any .side-menu a {
+  padding: 10px 0;
+  display: block;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
 }
 .any .box.header,
 .any .box.content,
-.any .box.banner,
 .any .box.footer {
   padding: 20px 15px 10px 15px;
 }
@@ -33,15 +50,10 @@
 .any .box.header .menu a {
   padding: 10px 15px;
 }
+.any .box.content {
+  margin-top: 60px;
+}
 .any .box.content .content-inner img {
-  max-width: 100%;
-  height: auto;
-  vertical-align: bottom;
-}
-.any .box.banner {
-  margin-top: 100px;
-}
-.any .box.banner .banner-inner img {
   max-width: 100%;
   height: auto;
   vertical-align: bottom;
@@ -101,8 +113,7 @@
   }
   .any .header-inner,
   .any .content-inner,
-  .any .footer-inner,
-  .any .banner-inner {
+  .any .footer-inner {
     width: 1140px;
     margin-left: auto;
     margin-right: auto;

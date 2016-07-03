@@ -4,16 +4,13 @@ var daddy = {};
     var MenuItemSelected = any.events.MenuItemSelected;
 
     function Daddy() {
-        var self = this, header, content, footer, banner;
-        banner = new daddy.Banner();
+        var self = this, header, content, footer;
         content = new daddy.Content();
         footer = new daddy.Footer();
         header = new daddy.Header();
-        self.append(banner);
         self.append(content);
         self.append(footer);
         self.append(header);
-        self.banner = banner;
         self.content = content;
         self.footer = footer;
         self.header = header;

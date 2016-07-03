@@ -14,7 +14,7 @@
         }]);
         menu1 = new Box(new Item('<div id="btn-menu"><i class="fa fa-bars"></i></div>'));
         menu2 = new Menu(data, '<a>{name}</a>');
-        header1 = new Box(new Item('<div>The Life of Dad</div>'));
+        header1 = new Box(new Item('<div>THE LIFE OF DAD</div>'));
         header1.addClass('title');
         header2 = new Box();
         header2.append(menu1);

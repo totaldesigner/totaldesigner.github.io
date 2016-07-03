@@ -2,9 +2,30 @@
   color: #666666;
   .title {
     font-size: 30px;
+    font-weight: bold;
+  }
+  .sub-title {
+    float: none;
+  }
+  .side-menu {
+    position: fixed;
+    top: 150px;
+    right: 0;
+    //-moz-border-radius-bottomright: 90px;
+    //-webkit-border-bottom-right-radius: 90px;
+    //border-bottom-right-radius: 90px;
+    background: #ffffff;
+    padding: 20px;
+    a {
+      padding: 10px 0;
+      display: block;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+    }
   }
   .box {
-    &.header, &.content, &.banner, &.footer {
+    &.header, &.content, &.footer {
       padding: 20px 15px 10px 15px;
     }
     &.header {
@@ -35,17 +56,8 @@
       }
     }
     &.content {
+      margin-top: 60px;
       .content-inner {
-        img {
-          max-width: 100%;
-          height: auto;
-          vertical-align: bottom;
-        }
-      }
-    }
-    &.banner {
-      margin-top: 100px;
-      .banner-inner {
         img {
           max-width: 100%;
           height: auto;
@@ -135,7 +147,7 @@
         margin-bottom: 20px;
       }
     }
-    .header-inner, .content-inner, .footer-inner, .banner-inner {
+    .header-inner, .content-inner, .footer-inner {
       width: 1140px;
       margin-left: auto;
       margin-right: auto;
