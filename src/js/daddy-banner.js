@@ -18,28 +18,28 @@
         var self = this, inner;
         var data = new List([{
             title: '1',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         }, {
             title: '2',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         }, {
             title: '3',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         }, {
             title: '4',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         },{
             title: '5',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         },{
             title: '6',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         },{
             title: '7',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         },{
             title: '8',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         }]);
         inner = new Box(new Carousel(data, '<div><img src="{image}" /></div>'));
         inner.addClass('banner-inner');

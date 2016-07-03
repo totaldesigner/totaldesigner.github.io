@@ -93,13 +93,6 @@
   .any .box.header .menu {
     float: right;
   }
-  .any .box .header-inner,
-  .any .box .content-inner,
-  .any .box .footer-inner,
-  .any .box .banner-inner {
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 /* ########## 1190px 이상 ########## */
 @media (min-width: 1190px) {

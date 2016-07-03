@@ -7,7 +7,7 @@
         var self = this, data;
         data = new List([{
             name: 'Freesat G2 (HDR-1000S)',
-            image: 'dist/img/hdr-1000s.jpg',
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hdr-1000s.jpg',
             desc: 'Free Time is of course the Humax HDR-1000S’s key feature. All of the past week’s programmes ' +
             'from the various online streaming services are available for you to watch, all accessed from the central EPG. ' +
             'At present, only BBC iPlayer and ITV Player are available, but Freesat hopes to add 4OD and Demand 5 later this year. ' +
@@ -18,7 +18,7 @@
             'You can also connect a USB memory device and play media files from there.'
         }, {
             name: 'HATS (Humax Automated Testing System',
-            image: 'dist/img/hdr-1000s.jpg',
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hdr-1000s.jpg',
             desc: 'Free Time is of course the Humax HDR-1000S’s key feature. All of the past week’s programmes ' +
             'from the various online streaming services are available for you to watch, all accessed from the central EPG. ' +
             'At present, only BBC iPlayer and ITV Player are available, but Freesat hopes to add 4OD and Demand 5 later this year. ' +

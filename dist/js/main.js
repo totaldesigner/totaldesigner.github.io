@@ -48,28 +48,28 @@ var daddy = {};
         var self = this, inner;
         var data = new List([{
             title: '1',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         }, {
             title: '2',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         }, {
             title: '3',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         }, {
             title: '4',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         },{
             title: '5',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         },{
             title: '6',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         },{
             title: '7',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         },{
             title: '8',
-            image: 'dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
         }]);
         inner = new Box(new Carousel(data, '<div><img src="{image}" /></div>'));
         inner.addClass('banner-inner');
@@ -89,7 +89,7 @@ var daddy = {};
         var self = this, data;
         data = new List([{
             name: 'Freesat G2 (HDR-1000S)',
-            image: 'dist/img/hdr-1000s.jpg',
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hdr-1000s.jpg',
             desc: 'Free Time is of course the Humax HDR-1000S’s key feature. All of the past week’s programmes ' +
             'from the various online streaming services are available for you to watch, all accessed from the central EPG. ' +
             'At present, only BBC iPlayer and ITV Player are available, but Freesat hopes to add 4OD and Demand 5 later this year. ' +
@@ -100,7 +100,7 @@ var daddy = {};
             'You can also connect a USB memory device and play media files from there.'
         }, {
             name: 'HATS (Humax Automated Testing System',
-            image: 'dist/img/hdr-1000s.jpg',
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hdr-1000s.jpg',
             desc: 'Free Time is of course the Humax HDR-1000S’s key feature. All of the past week’s programmes ' +
             'from the various online streaming services are available for you to watch, all accessed from the central EPG. ' +
             'At present, only BBC iPlayer and ITV Player are available, but Freesat hopes to add 4OD and Demand 5 later this year. ' +
