@@ -24,24 +24,17 @@
             image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms1000s_music.png'
         }, {
             title: '5',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms1000s_tvguide.png'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms1000s_recordings.png'
         }, {
             title: '6',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms1000s_recordings.png'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms1000s_tvguide.png'
         }]);
         self.append(new Carousel(data, '<div><img src="{image}" /></div>'));
         data = new List([{
             id: 'hats',
             name: 'HATS',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hats_sw.png',
-            desc: 'Free Time is of course the Humax HDR-1000S’s key feature. All of the past week’s programmes ' +
-            'from the various online streaming services are available for you to watch, all accessed from the central EPG. ' +
-            'At present, only BBC iPlayer and ITV Player are available, but Freesat hopes to add 4OD and Demand 5 later this year. ' +
-            'The Humax HDR-1000S’s hard-disk capacity is 500GB, which is enough to hold 125 hours of high-definition programmes ' +
-            'or 300 hours of standard definition. An alternative 1TB version, the Humax HDR-1000S/1TB, is also available for £299. ' +
-            'The Humax HDR-1000S isn’t merely a conduit for viewing TV though. Thanks to the network connection, you can access music, ' +
-            'video and photos from servers on your home network, as well as a range of internet content from Humax’s TV Portal (more on this later). ' +
-            'You can also connect a USB memory device and play media files from there.'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hats_intro.png',
+            desc: 'Humax Automated Testing System</br>HATS is a automated black-box testing tool for all HUMAX products'
         }, {
             id: 'hms-1000s',
             name: 'iCord Evolution (HMS-1000S)',
