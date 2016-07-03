@@ -1,6 +1,3 @@
-/**
- * Created by mspark on 6/22/16.
- */
 /*jshint browser:true */
 'use strict';
 
@@ -14,39 +11,20 @@ var CLASS_NAME = {
     MENU: 'menu',
     CONTEXT_MENU_ITEM: 'context-menu-item',
     CONTEXT_MENU: 'context-menu',
+    PAGINATION_ITEM: 'pagination-item',
+    PAGINATION: 'pagination',
+    CAROUSEL_ITEM: 'carousel-item',
+    CAROUSEL: 'carousel',
     LAYOUT: 'layout',
     LAYER: 'layer',
-    PAGE: 'page'
+    PAGE: 'page',
+    SELECTED: 'selected'
 };
+var ANIMATION_DURATION = 1000;
 
 var any = any || {};
 any = (function () {
-    var utils, events, collections, controls, animation;
-
-    animation = (function () {
-        if (animation) {
-            return animation;
-        }
-        else {
-            var transition, element = document.createElement('fake');
-            var transitions = {
-                transition: 'transitionend',
-                OTransition: 'oTransitionEnd',
-                MozTransition: 'transitionend',
-                WebkitTransition: 'webkitTransitionEnd'
-            };
-            for (transition in transitions) {
-                if (transitions.hasOwnProperty(transition)) {
-                    if (element.style[transition]) {
-                        return {
-                            transition: transition,
-                            transitionEnd: transitions[transition]
-                        };
-                    }
-                }
-            }
-        }
-    })();
+    var utils, events, collections, controls, win;
 
     utils = (function () {
 
@@ -90,6 +68,18 @@ any = (function () {
             self.sender = sender;
             self.args = args;
         }
+
+        function WindowResizing(sender, args) {
+            Event.call(this, 'WindowResizing', sender, args);
+        }
+
+        WindowResizing.prototype = new Event();
+
+        function WindowResizeEnd(sender, args) {
+            Event.call(this, 'WindowResizeEnd', sender, args);
+        }
+
+        WindowResizeEnd.prototype = new Event();
 
         /**
          * ItemAdded
@@ -194,7 +184,9 @@ any = (function () {
             ItemAdded: ItemAdded,
             ItemRemoved: ItemRemoved,
             ItemUpdated: ItemUpdated,
-            MenuItemSelected: MenuItemSelected
+            MenuItemSelected: MenuItemSelected,
+            WindowResizing: WindowResizing,
+            WindowResizeEnd: WindowResizeEnd
         };
     })();
 
@@ -268,6 +260,7 @@ any = (function () {
             self.element = element;
             self.children = [];
             self.html = null;
+            self.transitioning = false;
         }
 
         utils.mixin(Control.prototype, events.EventTarget.prototype);
@@ -296,57 +289,91 @@ any = (function () {
                 element.appendChild(child.element);
             }
         };
-        Control.prototype.show = function (duration, complete) {
-            var self = this, element = self.element, classList = element.classList;
-            if (duration) {
-                element.style[animation.transition] = utils.format('opacity {duration}ms', {
-                    duration: duration
-                });
+        Control.prototype.transit = function (css, transition, complete) {
+            var self = this, element, classList, transitions, transitionEnds;
+            element = self.element;
+            classList = element.classList;
+            transitions = ['-webkit-transition', '-moz-transition', '-o-transition', 'transition'];
+            transitionEnds = ['webkitTransitionEnd', 'transitionend', 'msTransitionEnd', 'oTransitionEnd'];
+            if (transition) {
+                self.transitioning = true;
+                for (var i = 0; i < transitions.length; i++) {
+                    element.style[transitions[i]] = transition;
+                }
                 if (complete) {
-                    element.addEventListener(animation.transitionEnd, function () {
-                        element.removeEventListener(animation.transitionEnd);
-                        element.style[animation.transition] = '';
-                        complete();
+                    transitionEnds.forEach(function (e) {
+                        var listener = function () {
+                            transitionEnds.forEach(function (e) {
+                                element.removeEventListener(e, listener);
+                            });
+                            self.transitioning = false;
+                            complete();
+                        };
+                        self.element.addEventListener(e, listener, false);
                     });
                 }
             }
-            if (classList.contains('hidden')) {
-                classList.remove('hidden');
+            setTimeout(function () {
+                if (css instanceof String) {
+                    if (classList.contains(css)) {
+                        classList.remove(css);
+                    } else {
+                        classList.add(css);
+                    }
+                } else {
+                    for (var key in css) {
+                        if (css.hasOwnProperty(key)) {
+                            element.style[key] = css[key];
+                        }
+                    }
+                }
+            }, 0);
+        };
+        Control.prototype.show = function (duration, complete) {
+            var self = this, css = 'hidden', transition, element = self.element, classList = element.classList;
+            if (classList.contains(css)) {
+                if (duration) {
+                    transition = utils.format('opacity {duration}ms', {
+                        duration: duration
+                    });
+                }
+                self.transit(css, transition, complete);
             }
         };
         Control.prototype.hide = function (duration, complete) {
-            var self = this, element = self.element, classList = element.classList;
-            if (duration) {
-                element.style[animation.transition] = utils.format('opacity {duration}ms', {
-                    duration: duration
-                });
-                if (complete) {
-                    element.addEventListener(animation.transitionEnd, function () {
-                        element.removeEventListener(animation.transitionEnd);
-                        element.style[animation.transition] = '';
-                        complete();
+            var self = this, css = 'hidden', transition, element = self.element, classList = element.classList;
+            if (!classList.contains(css)) {
+                if (duration) {
+                    transition = utils.format('opacity {duration}ms ease', {
+                        duration: duration
                     });
                 }
-            }
-            if (!classList.contains('hidden')) {
-                classList.add('hidden');
+                self.transit(css, transition, complete);
             }
         };
-        Control.prototype.moveTo = function (x, y, duration, complete) {
-            var self = this, element = self.element;
-            if (duration) {
-                element.style[animation.transition] = utils.format('top {duration}ms, left {duration}ms', {
-                    duration: duration
+        Control.prototype.moveTo = function (x, y, speed, complete) {
+            var self = this, transition, style;
+            if (speed) {
+                transition = utils.format('all {speed}ms ease', {
+                    speed: speed
                 });
-                if (complete) {
-                    element.addEventListener(animation.transitionEnd, function () {
-                        element.removeEventListener(animation.transitionEnd);
-                        complete();
-                    });
-                }
             }
-            element.style.left = x + 'px';
-            element.style.top = y + 'px';
+            //style = utils.format('translate3d({x}px, {y}px, {z}px)', {
+            //    x: x,
+            //    y: y,
+            //    z: 0
+            //});
+            style = utils.format('translate({x}px, {y}px)', {
+                x: x,
+                y: y
+            });
+            self.transit({
+                '-webkit-transform': style,
+                '-moz-transform': style,
+                '-o-transform': style,
+                '-ms-transform': style,
+                'transform': style
+            }, transition, complete);
         };
         Control.prototype.addClass = function (className) {
             var self = this, element = self.element, classList;
@@ -415,6 +442,15 @@ any = (function () {
         }
 
         ListView.prototype = new Control();
+        ListView.prototype.getNodeIndex = function (node) {
+            var index = 0;
+            while ((node = node.previousSibling)) {
+                if (node.nodeType !== 3 || !/^\s*$/.test(node.data)) {
+                    index++;
+                }
+            }
+            return index;
+        };
         ListView.prototype.onItemAdded = function (e) {
             var self = this, args, item;
             args = e.args;
@@ -460,24 +496,46 @@ any = (function () {
          */
         function Menu(list, itemTemplate) {
             var self = this;
+            self.selectedIndex = 0;
             ListView.call(self, list, itemTemplate, CLASS_NAME.MENU);
         }
 
         Menu.prototype = new ListView();
-        Menu.prototype.draw = function() {
+        Menu.prototype.draw = function () {
             var self = this, child, children;
             ListView.prototype.draw.call(self);
             children = self.element.querySelectorAll('.' + self.className + '-item');
             for (var i = 0, l = children.length; i < l; i++) {
                 child = children[i];
-                self.onMenuItemSelected(child);
+                self.addClickEvent(child);
             }
+            children[0].classList.add(CLASS_NAME.SELECTED);
         };
-        Menu.prototype.onMenuItemSelected = function(child) {
+        Menu.prototype.addClickEvent = function (child) {
             var self = this;
-            child.addEventListener('click', function(e) {
-                self.dispatchEvent(new events.MenuItemSelected(self, e));
+            child.addEventListener('click', function () {
+                var index, c = child;
+                (function click() {
+                    index = self.getNodeIndex(c);
+                    self.select(index);
+                    self.dispatchEvent(new events.MenuItemSelected(self, {
+                        index: index,
+                        item: self.children[index]
+                    }));
+                })();
             });
+        };
+        Menu.prototype.select = function (index, prevent) {
+            var self = this, selected;
+            selected = self.element.querySelector('.' + CLASS_NAME.SELECTED);
+            if (selected) {
+                selected.classList.remove(CLASS_NAME.SELECTED);
+            }
+            self.children[index].element.classList.add(CLASS_NAME.SELECTED);
+            self.selectedIndex = index;
+            if (!prevent) {
+                self.children[index].element.click();
+            }
         };
 
         /**
@@ -490,15 +548,189 @@ any = (function () {
 
         ContextMenu.prototype = new Menu();
 
+        function Navigation(prev, next) {
+            var self = this, prevItem, nextItem;
+            prevItem = new Item(prev);
+            nextItem = new Item(next);
+            prevItem.addClass('prev');
+            nextItem.addClass('next');
+            self.append(prevItem);
+            self.append(nextItem);
+            self.addClass('navigation');
+        }
+
+        Navigation.prototype = new Control();
+
         /**
          * Pagination
          * @constructor
          */
-        function Pagination() {
-
+        function Pagination(list, itemTemplate) {
+            var self = this;
+            ListView.call(self, list, itemTemplate, CLASS_NAME.PAGINATION);
         }
 
-        Pagination.prototype = new ListView();
+        Pagination.prototype = new Menu();
+        Pagination.prototype.draw = function () {
+            var self = this;
+            Menu.prototype.draw.call(self);
+        };
+
+        /**
+         * Carousel
+         * @param list
+         * @param itemTemplate
+         * @param options
+         * @constructor
+         */
+        function Carousel(list, itemTemplate, options) {
+            var self = this, settings;
+            settings = {
+                visibleItems: 3,
+                speed: ANIMATION_DURATION,
+                delay: 5000,
+                pagination: true
+            };
+            utils.mixin(settings, options || {});
+            self.settings = settings;
+            ListView.call(self, list, itemTemplate, CLASS_NAME.CAROUSEL);
+            self.wrapper = new controls.Box();
+            self.wrapper.addClass('carousel-wrapper');
+            self.currentIndex = 0;
+            win.addEventListener('WindowResizeEnd', function (e) {
+                self.onWindowResizeEnd(e);
+            });
+        }
+
+        Carousel.prototype = new ListView();
+        Carousel.prototype.draw = function () {
+            var self = this, wrapper, firstChild, child, children, visibleItems, childWidth;
+            wrapper = self.wrapper;
+            children = self.children;
+            visibleItems = self.settings.visibleItems;
+            childWidth = 100 / visibleItems;
+            for (var i = 0; i < visibleItems; i++) {
+                child = children[i];
+                child.draw();
+                child.element.style.width = childWidth + '%';
+                wrapper.element.appendChild(child.element);
+            }
+            self.element.appendChild(wrapper.element);
+            setTimeout(function () {
+                firstChild = children[0];
+                childWidth = firstChild.element.clientWidth;
+                wrapper.element.style.width = (childWidth * children.length) + 'px';
+                for (var i = 0, l = children.length; i < l; i++) {
+                    child = children[i];
+                    child.element.style.width = childWidth + 'px';
+                    if (i >= visibleItems) {
+                        child.draw();
+                        wrapper.element.appendChild(child.element);
+                    }
+                }
+                if (self.settings.pagination) {
+                    self.createPagination();
+                }
+            }, 0);
+            self.start();
+        };
+        Carousel.prototype.createPagination = function () {
+            var self = this, children, visibleItems, slides, pagination, data;
+            visibleItems = self.settings.visibleItems;
+            children = self.children;
+            slides = Math.ceil(children.length / visibleItems);
+            data = [];
+            for (var i = 0; i < slides; i++) {
+                data.push({
+                    index: i
+                });
+            }
+            pagination = new controls.Pagination(new collections.List(data), '<div><span></span></div>');
+            pagination.addEventListener('MenuItemSelected', function (e) {
+                var args = e.args;
+                self.slide(args.index);
+            });
+            pagination.draw();
+            self.element.appendChild(pagination.element);
+            self.pagination = pagination;
+        };
+        Carousel.prototype.slide = function (slideIndex) {
+            var self = this, wrapper = self.wrapper;
+            self.restart();
+            wrapper.moveTo(self.getNewPosition(slideIndex), 0, self.settings.speed, function () {
+                if (self.pagination) {
+                    self.pagination.select(self.getCurrentSlideIndex(), true);
+                }
+                if (self.delayedTask) {
+                    setTimeout(function () {
+                        self.delayedTask();
+                        self.delayedTask = null;
+                    }, 0);
+                }
+            });
+        };
+        Carousel.prototype.prev = function () {
+            var self = this;
+            this.slide(self.getCurrentSlideIndex() - 1);
+        };
+        Carousel.prototype.next = function () {
+            var self = this;
+            this.slide(self.getCurrentSlideIndex() + 1);
+        };
+        Carousel.prototype.getCurrentSlideIndex = function () {
+            var self = this;
+            return Math.ceil(self.currentIndex / self.settings.visibleItems);
+        };
+        Carousel.prototype.getNewPosition = function (slideIndex) {
+            var self = this, children, visibleItems, currentIndex, maxIndex, newPosition, itemWidth;
+            children = self.children;
+            visibleItems = self.settings.visibleItems;
+            maxIndex = children.length - visibleItems;
+            if (slideIndex < 0) {
+                currentIndex = maxIndex;
+            } else {
+                currentIndex = slideIndex * visibleItems;
+                currentIndex = Math.min(currentIndex > children.length ? 0 : currentIndex, maxIndex);
+            }
+            itemWidth = children[0].element.clientWidth;
+            newPosition = (-itemWidth) * currentIndex;
+            self.currentIndex = currentIndex;
+            return newPosition;
+        };
+        Carousel.prototype.start = function () {
+            var self = this;
+            self.slideTimer = setInterval(function () {
+                self.next();
+            }, self.settings.delay);
+        };
+        Carousel.prototype.stop = function () {
+            clearInterval(this.slideTimer);
+        };
+        Carousel.prototype.restart = function () {
+            var self = this;
+            self.stop();
+            self.start();
+        };
+        //Carousel.prototype.onWindowResizing = function() {
+        //    console.log('WindowResizing: ' + new Date());
+        //};
+        Carousel.prototype.onWindowResizeEnd = function () {
+            var self = this, child, children, visibleItems, wrapper, width, childWidth;
+            children = self.children;
+            wrapper = self.wrapper;
+            if (wrapper.transitioning) {
+                self.delayedTask = self.onWindowResizeEnd;
+            } else {
+                visibleItems = self.settings.visibleItems;
+                width = self.element.clientWidth;
+                childWidth = width / visibleItems;
+                wrapper.element.style.width = (childWidth * children.length) + 'px';
+                for (var i = 0, l = children.length; i < l; i++) {
+                    child = children[i];
+                    child.element.style.width = childWidth + 'px';
+                }
+            }
+        };
 
         /**
          * Box
@@ -527,7 +759,7 @@ any = (function () {
         Layer.prototype = new Control();
 
         /**
-         * Dialog
+         * Dialog = self.wrapper
          * @constructor
          */
         function Dialog() {
@@ -548,7 +780,7 @@ any = (function () {
         Page.prototype = new Control();
         Page.prototype.draw = function () {
             var self = this, body;
-            body = document.getElementsByTagName('body')[0];
+            body = document.body;
             body.className = 'any';
             body.addEventListener('keydown', self.onKeyDown);
             Control.prototype.draw.call(self);
@@ -580,18 +812,36 @@ any = (function () {
             }
         };
 
+        function Window() {
+            var self = this;
+            window.addEventListener('resize', function () {
+                clearTimeout(window.resizeEnd);
+                window.resizeEnd = setTimeout(function () {
+                    self.dispatchEvent(new events.WindowResizeEnd(self));
+                }, 200);
+                self.dispatchEvent(new events.WindowResizing(self));
+            }, false);
+        }
+
+        Window.prototype = new Control();
+
         return {
             Item: Item,
             Box: Box,
             ListView: ListView,
             Menu: Menu,
+            Carousel: Carousel,
             ContextMenu: ContextMenu,
             Pagination: Pagination,
+            Navigation: Navigation,
             Layer: Layer,
             Dialog: Dialog,
-            Page: Page
+            Page: Page,
+            Window: Window
         };
     })();
+
+    win = new controls.Window();
 
     return {
         utils: utils,

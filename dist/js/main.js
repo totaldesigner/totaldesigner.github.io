@@ -4,16 +4,19 @@ var daddy = {};
     var MenuItemSelected = any.events.MenuItemSelected;
 
     function Daddy() {
-        var self = this, header, content, footer;
+        var self = this, header, content, footer, banner;
         header = new daddy.Header();
         content = new daddy.Content();
         footer = new daddy.Footer();
+        banner = new daddy.Banner();
         self.append(header);
         self.append(content);
         self.append(footer);
+        self.append(banner);
         self.header = header;
         self.content = content;
         self.footer = footer;
+        self.banner = banner;
     }
 
     Daddy.prototype = new Layer();
@@ -26,7 +29,56 @@ var daddy = {};
     };
 })();
 (function() {
+    var List = any.collections.List;
+    var Box = any.controls.Box;
+    var Item = any.controls.Item;
+    var Carousel = any.controls.Carousel;
 
+    function Work() {
+        var self = this;
+    }
+    Work.prototype = new Box();
+
+    function Life() {
+        var self = this;
+    }
+    Life.prototype = new Box();
+
+    function Banner() {
+        var self = this, inner;
+        var data = new List([{
+            title: '1',
+            image: 'dist/img/twins.jpg'
+        }, {
+            title: '2',
+            image: 'dist/img/twins.jpg'
+        }, {
+            title: '3',
+            image: 'dist/img/twins.jpg'
+        }, {
+            title: '4',
+            image: 'dist/img/twins.jpg'
+        },{
+            title: '5',
+            image: 'dist/img/twins.jpg'
+        },{
+            title: '6',
+            image: 'dist/img/twins.jpg'
+        },{
+            title: '7',
+            image: 'dist/img/twins.jpg'
+        },{
+            title: '8',
+            image: 'dist/img/twins.jpg'
+        }]);
+        inner = new Box(new Carousel(data, '<div><img src="{image}" /></div>'));
+        inner.addClass('banner-inner');
+        self.append(inner);
+        self.addClass('banner');
+    }
+
+    Banner.prototype = new Box();
+    daddy.Banner = Banner;
 })();
 (function () {
     var Box = any.controls.Box;

@@ -5,7 +5,8 @@
   font-size: 20px;
 }
 .any .box.header,
-.any .box.footer {
+.any .box.footer,
+.any .box.banner {
   padding: 20px 15px 10px 15px;
 }
 .any .box.header {
@@ -21,6 +22,11 @@
 }
 .any .box.header .menu a {
   padding: 10px 15px;
+}
+.any .box.banner .banner-inner img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
 }
 .any .box.photo img {
   max-width: 100%;
