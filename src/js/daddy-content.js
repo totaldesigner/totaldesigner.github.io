@@ -65,7 +65,7 @@
             'You can also connect a USB memory device and play media files from there.'
         }]);
         self.append(new ListView(data,
-            '<section id="{id}"><p><div>{name}</div><div><img src="{image}" /></div><div>{desc}</div></p></section>'));
+            '<section id="{id}"><p><div class="section-title">{name}</div><div><img src="{image}" /></div><div>{desc}</div></p></section>'));
         sideMenu = new Box(new ListView(new List([{
             'name': 'HATS',
             'id': 'hats'

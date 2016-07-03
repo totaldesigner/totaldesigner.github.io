@@ -22,6 +22,13 @@
   text-decoration: none;
   cursor: pointer;
 }
+.any .section-title {
+  padding-top: 30px;
+  padding-bottom: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: solid 1px #dddddd;
+}
 .any .box.header,
 .any .box.content,
 .any .box.footer {
