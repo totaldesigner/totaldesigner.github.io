@@ -27,7 +27,7 @@
         self.addClass('header');
         self.append(inner);
         menu2.addEventListener('MenuItemSelected', function(e) {
-            self.dispatchEvent(new MenuItemSelected(self, e));
+            self.dispatchEvent(e);
         });
     }
 

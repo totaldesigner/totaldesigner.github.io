@@ -88,6 +88,7 @@
         }]), '<div><a href="#{id}">{name}</a></div>'));
         sideMenu.addClass('side-menu');
         self.append(sideMenu);
+        self.addClass('work');
     }
     Work.prototype = new Box();
 
@@ -98,41 +99,55 @@
         self.append(subTitle);
         data = new List([{
             title: '1',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/family.jpg'
         }, {
             title: '2',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/family.jpg'
         }, {
             title: '3',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/family.jpg'
         }, {
             title: '4',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
-        },{
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/family.jpg'
+        }, {
             title: '5',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
-        },{
-            title: '6',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
-        },{
-            title: '7',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
-        },{
-            title: '8',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/family.jpg'
         }]);
-        self.append(new Carousel(data, '<div><img src="{image}" /></div>'));
+        self.append(new Carousel(data, '<div><img src="{image}" /></div>', {
+            visibleItems: 1
+        }));
+        self.addClass('life');
     }
     Life.prototype = new Box();
 
     function Content() {
-        var self = this, inner;
-        inner = new Box(new Work());
+        var self = this, inner, work;
+        work = new Work();
+        inner = new Box();
+        inner.append(work);
         inner.addClass('content-inner');
         self.append(inner);
         self.addClass('content');
+        self.work = work;
+        self.inner = inner;
     }
 
     Content.prototype = new Box();
+    Content.prototype.change = function(menu) {
+        var self = this;
+        if (menu === 'WORK') {
+            self.life.element.style.display = 'none';
+            self.work.element.style.display = 'block';
+        } else {
+            if (!self.life) {
+                self.life = new Life();
+                self.life.draw();
+                self.inner.append(self.life);
+                self.inner.element.appendChild(self.life.element);
+            }
+            self.work.element.style.display = 'none';
+            self.life.element.style.display = 'block';
+        }
+    };
     daddy.Content = Content;
 })();

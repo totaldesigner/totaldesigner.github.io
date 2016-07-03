@@ -18,9 +18,10 @@ var daddy = {};
 
     Daddy.prototype = new Layer();
     daddy.create = function() {
-        var self = this, d = new Daddy();
+        var d = new Daddy();
         d.header.addEventListener('MenuItemSelected', function(e) {
-            d.dispatchEvent(new MenuItemSelected(self, e));
+            var index = e.args.index;
+            d.content.change(['WORK', 'LIFE'][index]);
         });
         return d;
     };

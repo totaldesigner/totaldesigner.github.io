@@ -71,6 +71,10 @@
 .any .box.content .content-inner section img {
   width: 400px;
 }
+.any .box.content .life img {
+  max-width: 100%;
+  height: auto;
+}
 .any .box.footer {
   padding-top: 5px;
   border-top: solid 1px #dddddd;
