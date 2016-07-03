@@ -39,25 +39,28 @@ var daddy = {};
         self.append(subTitle);
         data = new List([{
             title: '1',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hdr1000s_home.png'
         }, {
             title: '2',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hdr1000s_tvguide.png'
         }, {
             title: '3',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hdr1000s_showcase.png'
         }, {
             title: '4',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms1000s_music.png'
         }, {
             title: '5',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg'
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms1000s_tvguide.png'
+        }, {
+            title: '6',
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms1000s_recordings.png'
         }]);
         self.append(new Carousel(data, '<div><img src="{image}" /></div>'));
         data = new List([{
             id: 'hats',
             name: 'HATS',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/twins.jpg',
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hats_sw.png',
             desc: 'Free Time is of course the Humax HDR-1000S’s key feature. All of the past week’s programmes ' +
             'from the various online streaming services are available for you to watch, all accessed from the central EPG. ' +
             'At present, only BBC iPlayer and ITV Player are available, but Freesat hopes to add 4OD and Demand 5 later this year. ' +
@@ -69,7 +72,7 @@ var daddy = {};
         }, {
             id: 'hms-1000s',
             name: 'iCord Evolution (HMS-1000S)',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms-1000s.jpg',
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hms1000s.jpg',
             desc: 'Sehen, speichern, streamen ... und nie mehr was verpassen! Wovon Sie bei einem digitalen Satellitenreceiver bisher nicht mal träumen konnten ' +
             '– der iCord® Evolution hat’s! Mal wieder alles gleichzeitig auf Sendung? Nicht Ihr Problem! Sie nehmen ganz einfach bis zu vier Programme parallel ' +
             'auf und sehen sich ein weiteres live an. Sollte Ihr angestammtes TV-Sofa besetzt sein, verteilen Sie bis zu zwei Live-Sendungen im Heimnetzwerk und ' +
@@ -81,7 +84,7 @@ var daddy = {};
         }, {
             id: 'hdr-1000s',
             name: 'Freesat G2 (HDR-1000S)',
-            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hdr-1000s.jpg',
+            image: 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/hdr1000s.jpg',
             desc: 'Free Time is of course the Humax HDR-1000S’s key feature. All of the past week’s programmes ' +
             'from the various online streaming services are available for you to watch, all accessed from the central EPG. ' +
             'At present, only BBC iPlayer and ITV Player are available, but Freesat hopes to add 4OD and Demand 5 later this year. ' +
