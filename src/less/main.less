@@ -4,30 +4,6 @@
     font-size: 30px;
     font-weight: bold;
   }
-  .sub-title {
-    float: none;
-  }
-  .side-menu {
-    position: fixed;
-    top: 350px;
-    right: 0;
-    //-moz-border-radius-bottomright: 90px;
-    //-webkit-border-bottom-right-radius: 90px;
-    //border-bottom-right-radius: 90px;
-    background: #ffffff;
-    padding: 20px;
-    border-left: solid 1px #dddddd;
-    border-top: solid 1px #dddddd;
-    border-bottom: solid 1px #dddddd;
-    a {
-      padding: 10px 15px;
-      display: block;
-      font-size: 14px;
-      text-decoration: none;
-      cursor: pointer;
-      color: #808080;
-    }
-  }
   .section-title {
     padding-top: 30px;
     padding-bottom: 5px;
@@ -71,18 +47,14 @@
       .content-inner {
         img {
           max-width: 100%;
+          width: 100%;
+          height: auto;
           vertical-align: bottom;
         }
         section {
           img {
             width: 400px;
           }
-        }
-      }
-      .life {
-        img {
-          max-width: 100%;
-          height: auto;
         }
       }
     }
@@ -116,12 +88,6 @@
         }
       }
     }
-    .carousel {
-      img {
-        height:100px;
-        width:100%;
-      }
-    }
   }
 }
 
@@ -131,30 +97,8 @@
     .header-inner {
       padding-left: 15px;
     }
-    #btn-menu {
-      padding: 6px 12px;
-      border: solid 1px #aaaaaa;
-      border-radius: 5px;
-      background-color: #ffffff;
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      cursor: pointer;
-      &:hover {
-        background-color: #dddddd;
-      }
-    }
     .menu {
       display: none;
-    }
-    .side-menu {
-      display: none;
-    }
-    .carousel {
-      img {
-        height:150px;
-        width:100%;
-      }
     }
   }
 }
@@ -164,18 +108,9 @@
   .any {
     .box {
       &.header {
-        #btn-menu {
-          display: none;
-        }
         .menu {
           float: right;
         }
-      }
-    }
-    .carousel {
-      img {
-        height:150px;
-        width:100%;
       }
     }
   }
@@ -187,12 +122,6 @@
     .box {
       &.header {
         margin-bottom: 20px;
-      }
-    }
-    .carousel {
-      img {
-        height:200px;
-        width:100%;
       }
     }
     .header-inner, .content-inner, .footer-inner {

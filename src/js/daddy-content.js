@@ -1,14 +1,10 @@
 (function () {
     var List = any.collections.List;
-    var Item = any.controls.Item;
     var Box = any.controls.Box;
     var Carousel = any.controls.Carousel;
 
     function Content() {
-        var self = this, data, subTitle, inner;
-        subTitle = new Item('<div class="sub-title"><h3>LIFE</h3></div>');
-        subTitle.addClass('sub-title');
-        self.append(subTitle);
+        var self = this, data, inner;
         var prefix = 'https://raw.githubusercontent.com/totaldesigner/totaldesigner.github.io/master/dist/img/';
         data = new List([
             {title: '1', image: 'family.jpg'},

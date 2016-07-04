@@ -4,7 +4,7 @@
 
     function Footer() {
         var self = this, inner;
-        inner = new Box(new Item('<div class="copyright"><p>Copyright© totaldesigner</p></div>'));
+        inner = new Box(new Item('<div class="copyright"><p></p></div>'));
         inner.addClass('footer-inner');
         self.append(inner);
         self.addClass('footer');

@@ -5,27 +5,6 @@
   font-size: 30px;
   font-weight: bold;
 }
-.any .sub-title {
-  float: none;
-}
-.any .side-menu {
-  position: fixed;
-  top: 350px;
-  right: 0;
-  background: #ffffff;
-  padding: 20px;
-  border-left: solid 1px #dddddd;
-  border-top: solid 1px #dddddd;
-  border-bottom: solid 1px #dddddd;
-}
-.any .side-menu a {
-  padding: 10px 15px;
-  display: block;
-  font-size: 14px;
-  text-decoration: none;
-  cursor: pointer;
-  color: #808080;
-}
 .any .section-title {
   padding-top: 30px;
   padding-bottom: 5px;
@@ -66,14 +45,12 @@
 }
 .any .box.content .content-inner img {
   max-width: 100%;
+  width: 100%;
+  height: auto;
   vertical-align: bottom;
 }
 .any .box.content .content-inner section img {
   width: 400px;
-}
-.any .box.content .life img {
-  max-width: 100%;
-  height: auto;
 }
 .any .box.footer {
   padding-top: 5px;
@@ -91,61 +68,26 @@
     padding: 10px 7px;
     font-size: 11px;
   }
-  .any .carousel img {
-    height: 100px;
-    width: 100%;
-  }
 }
 /* ########## 767px 이하 ########## */
 @media (max-width: 767px) {
   .any .header-inner {
     padding-left: 15px;
   }
-  .any #btn-menu {
-    padding: 6px 12px;
-    border: solid 1px #aaaaaa;
-    border-radius: 5px;
-    background-color: #ffffff;
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    cursor: pointer;
-  }
-  .any #btn-menu:hover {
-    background-color: #dddddd;
-  }
   .any .menu {
     display: none;
-  }
-  .any .side-menu {
-    display: none;
-  }
-  .any .carousel img {
-    height: 150px;
-    width: 100%;
   }
 }
 /* ########## 768px 이상 ########## */
 @media (min-width: 768px) {
-  .any .box.header #btn-menu {
-    display: none;
-  }
   .any .box.header .menu {
     float: right;
-  }
-  .any .carousel img {
-    height: 150px;
-    width: 100%;
   }
 }
 /* ########## 1190px 이상 ########## */
 @media (min-width: 1190px) {
   .any .box.header {
     margin-bottom: 20px;
-  }
-  .any .carousel img {
-    height: 200px;
-    width: 100%;
   }
   .any .header-inner,
   .any .content-inner,
