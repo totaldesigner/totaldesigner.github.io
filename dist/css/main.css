@@ -48,9 +48,15 @@
   width: 100%;
   height: auto;
   vertical-align: bottom;
+  -webkit-filter: grayscale(100%);
+  /* Chrome, Safari, Opera */
+  filter: grayscale(100%);
+  cursor: pointer;
 }
-.any .box.content .content-inner section img {
-  width: 400px;
+.any .box.content .content-inner img:hover {
+  -webkit-filter: grayscale(0%);
+  /* Chrome, Safari, Opera */
+  filter: grayscale(0%);
 }
 .any .box.footer {
   padding-top: 5px;
